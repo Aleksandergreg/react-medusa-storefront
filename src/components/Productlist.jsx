@@ -1,6 +1,5 @@
 //create a productlist component, this component should use useEffect to fetch a list of products from fakestore API
 import React, { useEffect, useState } from 'react';
-import Product from './Product';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/productSlice'; // RETTET HER
 import axios from 'axios';
