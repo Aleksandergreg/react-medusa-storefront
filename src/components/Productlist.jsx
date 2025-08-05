@@ -1,7 +1,8 @@
 //create a productlist component, this component should use useEffect to fetch a list of products from fakestore API
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import Product from './Product'; // UPDATED
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../redux/productSlice'; // RETTET HER
+import { setProducts } from '../redux/productSlice';
 import axios from 'axios';
 import { Grid } from '@mui/material';
 
@@ -18,16 +19,17 @@ const Productlist = () => {
     };
 
     useEffect(() => {
-        fetchProducts();
+        // To avoid fetching products every time the component re-renders
+        if (products.length === 0) {
+            fetchProducts();
+        }
     }, []);
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
         {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-            {/* The Product component is not provided, so this will need to be created */}
-            {/* <Product product={product} /> */}
-            <pre>{JSON.stringify(product, null, 2)}</pre>
+              <Product product={product} />
             </Grid>
         ))}
         </Grid>
