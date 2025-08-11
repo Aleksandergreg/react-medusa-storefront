@@ -1,42 +1,83 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
   return (
-    <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <CardMedia
-          component="img"
+    <Card
+      component={Link}
+      to={`/product/${product.id}`}
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        textDecoration: 'none',
+        color: 'inherit',
+        transition: 'transform 0.2s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: 3,
+        }
+      }}
+    >
+      <CardMedia
+        component="img"
+        sx={{
+          height: '200px',
+          objectFit: 'contain',
+          backgroundColor: '#f5f5f5' 
+        }}
+        image={product.image}
+        alt={product.title}
+      />
+      <CardContent 
+        sx={{ 
+          flexGrow: 1, 
+          display: 'flex', 
+          flexDirection: 'column',
+          padding: 2
+        }}
+      >
+        {/* Title container with fixed height */}
+        <Box
           sx={{
-            height: '200px', 
-            objectFit: 'contain' 
+            height: '4.5em', // Fixed height for title area
+            mb: 2,
+            display: 'flex',
+            alignItems: 'flex-start'
           }}
-          image={product.image}
-          alt={product.title}
-        />
-        <CardContent sx={{ flexGrow: 1 }}>
+        >
           <Typography
-            gutterBottom
             variant="h6"
             component="h2"
             sx={{
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
-              WebkitLineClamp: '2',
+              WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
-              height: '3.6em' 
+              lineHeight: 1.3,
+              fontSize: '1.1rem'
             }}
           >
             {product.title}
           </Typography>
-          <Typography variant="h5">
+        </Box>
+        
+        {/* Price at bottom */}
+        <Box sx={{ mt: 'auto' }}>
+          <Typography 
+            variant="h5" 
+            sx={{ 
+              fontWeight: 'bold',
+              color: 'primary.main'
+            }}
+          >
             ${product.price}
           </Typography>
-        </CardContent>
-      </Card>
-    </Link>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -3,7 +3,7 @@ import Product from './Product';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/productSlice';
 import axios from 'axios';
-import { Grid } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 
 const Productlist = () => {
   const products = useSelector((state) => state.allProducts.products);
@@ -25,13 +25,26 @@ const Productlist = () => {
   }, []);
 
   return (
-    <Grid container spacing={4}>
-      {products.map((product) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{ display: 'flex' }}>
-          <Product product={product} />
-        </Grid>
-      ))}
-    </Grid>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Grid 
+            item 
+            xs={12} 
+            sm={6} 
+            md={4} 
+            lg={3} 
+            key={product.id}
+            sx={{ 
+              display: 'flex',
+              minHeight: '400px' 
+            }}
+          >
+            <Product product={product} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 
