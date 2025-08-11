@@ -4,21 +4,31 @@ import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
   return (
-    // Wrap the entire Card in a Link component
     <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardMedia
           component="img"
           sx={{
-            pt: '5%',
-            objectFit: 'contain',
-            height: '200px',
+            height: '200px', // Set a fixed height for the image container
+            objectFit: 'cover' // This is the key change
           }}
           image={product.image}
           alt={product.title}
         />
         <CardContent sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h6" component="h2">
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="h2"
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '2',
+              WebkitBoxOrient: 'vertical',
+              height: '3.6em' 
+            }}
+          >
             {product.title}
           </Typography>
           <Typography variant="h5">

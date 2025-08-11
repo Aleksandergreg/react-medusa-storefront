@@ -1,4 +1,3 @@
-//create a productlist component, this component should use useEffect to fetch a list of products from fakestore API
 import React, { useEffect } from 'react';
 import Product from './Product'; // UPDATED
 import { useDispatch, useSelector } from 'react-redux';
