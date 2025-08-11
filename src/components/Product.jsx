@@ -10,7 +10,7 @@ const Product = ({ product }) => {
           component="img"
           sx={{
             height: '200px', // Set a fixed height for the image container
-            objectFit: 'cover' // This is the key change
+            objectFit: 'contain' // This is the key change
           }}
           image={product.image}
           alt={product.title}
