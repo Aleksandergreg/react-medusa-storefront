@@ -9,8 +9,8 @@ const Product = ({ product }) => {
         <CardMedia
           component="img"
           sx={{
-            height: '200px', // Set a fixed height for the image container
-            objectFit: 'contain' // This is the key change
+            height: '200px', 
+            objectFit: 'contain' 
           }}
           image={product.image}
           alt={product.title}
