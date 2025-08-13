@@ -1,83 +1,29 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
   return (
-    <Card
-      component={Link}
-      to={`/product/${product.id}`}
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        textDecoration: 'none',
-        color: 'inherit',
-        transition: 'transform 0.2s ease-in-out',
-        '&:hover': {
-          transform: 'translateY(-2px)',
-          boxShadow: 3,
-        }
-      }}
-    >
-      <CardMedia
-        component="img"
-        sx={{
-          height: '200px',
-          objectFit: 'contain',
-          backgroundColor: '#f5f5f5' 
-        }}
-        image={product.image}
-        alt={product.title}
-      />
-      <CardContent 
-        sx={{ 
-          flexGrow: 1, 
-          display: 'flex', 
-          flexDirection: 'column',
-          padding: 2
-        }}
-      >
-        {/* Title container with fixed height */}
-        <Box
-          sx={{
-            height: '4.5em', // Fixed height for title area
-            mb: 2,
-            display: 'flex',
-            alignItems: 'flex-start'
-          }}
-        >
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              lineHeight: 1.3,
-              fontSize: '1.1rem'
-            }}
-          >
-            {product.title}
-          </Typography>
-        </Box>
-        
-        {/* Price at bottom */}
-        <Box sx={{ mt: 'auto' }}>
-          <Typography 
-            variant="h5" 
-            sx={{ 
-              fontWeight: 'bold',
-              color: 'primary.main'
-            }}
-          >
-            ${product.price}
-          </Typography>
-        </Box>
-      </CardContent>
-    </Card>
+    <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg">
+      <Link to={`/product/${product.id}`} className="block">
+        <div className="h-48 overflow-hidden">
+          <img
+            className="w-full h-full object-contain"
+            src={product.image}
+            alt={product.title}
+          />
+        </div>
+        <div className="p-4 flex-grow flex flex-col">
+          <div className="h-16 mb-2">
+            <h2 className="text-lg font-semibold text-gray-800 line-clamp-2">
+              {product.title}
+            </h2>
+          </div>
+          <div className="mt-auto">
+            <p className="text-xl font-bold text-gray-900">${product.price}</p>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 };
 

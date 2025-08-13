@@ -2,27 +2,28 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Productlist from './components/Productlist';
 import ProductDetail from './components/ProductDetail';
-import { AppBar, Toolbar, Typography, Container } from '@mui/material';
 
 function App() {
   return (
     <Router>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              My Fake Store
-            </Link>
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container>
+      <header className="bg-gray-800 text-white shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <h1 className="text-xl font-semibold">
+              <Link to="/" className="hover:text-gray-300">
+                My Fake Store
+              </Link>
+            </h1>
+          </div>
+        </div>
+      </header>
+      <main className="container mx-auto p-4">
         <Routes>
           <Route path="/" element={<Productlist />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="*" element={<div>404 Not Found!</div>} />
         </Routes>
-      </Container>
+      </main>
     </Router>
   );
 }

@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProduct, removeSelectedProduct } from '../redux/productSlice';
-import { Grid, Typography, Card, CardMedia, CardContent, CircularProgress, Box, Rating } from '@mui/material';
 
 const ProductDetail = () => {
     const { productId } = useParams();
@@ -23,51 +22,37 @@ const ProductDetail = () => {
         if (productId && productId !== "") {
             fetchProductDetail(productId);
         }
-        // Cleanup function
         return () => {
             dispatch(removeSelectedProduct());
         };
     }, [productId]);
 
-    // Show a loading spinner while the product is being fetched
     if (Object.keys(product).length === 0) {
         return (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-                <CircularProgress />
-            </Box>
+            <div className="flex justify-center mt-4">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
         );
     }
 
     return (
-        <Card sx={{ mt: 4 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <CardMedia
-                        component="img"
-                        image={product.image}
+        <div className="bg-white shadow-lg rounded-lg mt-4 overflow-hidden">
+            <div className="md:flex">
+                <div className="md:w-1/2">
+                    <img
+                        className="w-full h-auto max-h-96 object-contain p-3"
+                        src={product.image}
                         alt={product.title}
-                        sx={{ width: '100%', height: 'auto', maxHeight: 500, objectFit: 'contain', p: 3 }}
                     />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <CardContent>
-                        <Typography gutterBottom variant="h4" component="div">
-                            {product.title}
-                        </Typography>
-                        <Typography variant="h5" color="text.secondary" sx={{ mb: 2 }}>
-                            ${product.price}
-                        </Typography>
-                         <Rating name="read-only" value={product.rating.rate} readOnly />
-                        <Typography variant="body1" sx={{ mt: 2 }}>
-                            {product.description}
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" sx={{ mt: 2, fontStyle: 'italic' }}>
-                            Category: {product.category}
-                        </Typography>
-                    </CardContent>
-                </Grid>
-            </Grid>
-        </Card>
+                </div>
+                <div className="md:w-1/2 p-4 flex flex-col justify-center">
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.title}</h1>
+                    <p className="text-2xl text-gray-700 mb-4">${product.price}</p>
+                    <p className="text-gray-600 mb-4">{product.description}</p>
+                    <p className="text-sm text-gray-500 italic">Category: {product.category}</p>
+                </div>
+            </div>
+        </div>
     );
 };
 
